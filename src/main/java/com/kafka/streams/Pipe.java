@@ -32,27 +32,14 @@ public class Pipe {
 
         System.out.println(topology.describe());
 
-        // 카프카 스트림즈 만들기
-        final KafkaStreams streams = new KafkaStreams(topology, props);
-        final CountDownLatch latch = new CountDownLatch(1);
-
-        Runtime.getRuntime().addShutdownHook(new Thread("streams-shutdown-hook") {
-            @Override
-            public void run() {
-                streams.close();
-                latch.countDown();
-                System.out.println("topology terminated");
-            }
-        });
-
-        try {
+        // 카프카 스트림즈 생성 및 실행
+        try (KafkaStreams streams = new KafkaStreams(topology, props)) {
+            final CountDownLatch latch = new CountDownLatch(1);
             streams.start();
             System.out.println("topology started");
             latch.await();
         } catch (Throwable throwable) {
             System.exit(1);
-        } finally {
-            streams.close();
         }
 
         System.exit(0);

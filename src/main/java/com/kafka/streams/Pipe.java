@@ -1,13 +1,13 @@
 package com.kafka.streams;
 
-import java.util.Properties;
-import java.util.concurrent.CountDownLatch;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.KafkaStreams;
 import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.StreamsConfig;
 import org.apache.kafka.streams.Topology;
-import org.apache.kafka.streams.kstream.KStream;
+
+import java.util.Properties;
+import java.util.concurrent.CountDownLatch;
 
 public class Pipe {
 
@@ -22,10 +22,9 @@ public class Pipe {
         final StreamsBuilder builder = new StreamsBuilder();
 
         // streams-plaintext-input 토픽으로부터 새로운 입력 스트림을 생성한다.
-        KStream<String, String> source = builder.stream(KafkaTopic.STREAMS_PLAINTEXT_INPUT);
-
         // source의 결과를 streams-pipe-output 토픽으로 전달한다.
-        source.to(KafkaTopic.STREAMS_PIPE_OUTPUT);
+        builder.stream(KafkaTopic.STREAMS_PLAINTEXT_INPUT)
+            .to(KafkaTopic.STREAMS_PIPE_OUTPUT);
 
         // 토폴로지를 만든다.
         final Topology topology = builder.build();

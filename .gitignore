@@ -1,0 +1,53 @@
+HELP.md
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+### Kafka ###
+node1/kafka-data
+node2/kafka-data
+node3/kafka-data
+node1/kafka-varlog
+node2/kafka-varlog
+node3/kafka-varlog
+
+### Zookeeper ###
+node1/zookeeper-data
+node2/zookeeper-data
+node3/zookeeper-data
+node1/zookeeper-varlog
+node2/zookeeper-varlog
+node3/zookeeper-varlog

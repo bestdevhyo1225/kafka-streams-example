@@ -5,7 +5,6 @@ import org.apache.kafka.streams.KafkaStreams;
 import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.StreamsConfig;
 import org.apache.kafka.streams.Topology;
-import org.apache.kafka.streams.kstream.KStream;
 import org.apache.kafka.streams.kstream.ValueMapper;
 
 import java.util.Arrays;
@@ -23,10 +22,10 @@ public class LineSplit {
 
         // 토폴로지 만들기
         final StreamsBuilder builder = new StreamsBuilder();
-        KStream<String, String> source = builder.stream(KafkaTopic.STREAMS_PLAINTEXT_INPUT);
 
-        // flatMap, flatMapValues 메소드는 이전 스트림의 상태를 참고하지 않는다. -> '무상태 오퍼레이터' 라고도 한다.
-        source.flatMapValues((ValueMapper<String, Iterable<String>>) value -> Arrays.asList(value.split("\\W+")))
+        builder.<String, String>stream(KafkaTopic.STREAMS_PLAINTEXT_INPUT)
+            // flatMap, flatMapValues 메소드는 이전 스트림의 상태를 참고하지 않는다. -> '무상태 오퍼레이터' 라고도 한다.
+            .flatMapValues((ValueMapper<String, Iterable<String>>) value -> Arrays.asList(value.split("\\W+")))
             .to(KafkaTopic.STREAMS_LINE_SPLIT_OUTPUT);
 
         // 토폴로지를 만든다.

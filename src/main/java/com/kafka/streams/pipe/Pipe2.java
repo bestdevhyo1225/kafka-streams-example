@@ -1,5 +1,8 @@
-package com.kafka.streams;
+package com.kafka.streams.pipe;
 
+import com.kafka.streams.KafkaTopic;
+import com.kafka.streams.StreamsApplicationId;
+import com.kafka.streams.StreamsConfigValue;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.KafkaStreams;
 import org.apache.kafka.streams.StreamsBuilder;
@@ -9,7 +12,7 @@ import org.apache.kafka.streams.Topology;
 import java.util.Properties;
 import java.util.concurrent.CountDownLatch;
 
-public class Pipe {
+public class Pipe2 {
 
     public static void main(String[] args) {
         Properties props = new Properties();
